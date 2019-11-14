@@ -1,0 +1,19 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "+iWz1uzIfisUuNv5+QCjLxw8/X8=",
+			"path": "github.com/jinzhu/gorm",
+			"revision": "179760d8343ed15cbb9f071ca824bc35ee7784bb",
+			"revisionTime": "2019-10-28T08:18:11Z"
+		},
+		{
+			"checksumSHA1": "Hf2EdZUOQfrn+iW34gg2/0GHo94=",
+			"path": "github.com/jinzhu/inflection",
+			"revision": "f5c5f50e6090ae76a29240b61ae2a90dd810112e",
+			"revisionTime": "2019-06-03T04:28:36Z"
+		}
+	],
+	"rootPath": "github.com/material-seminario-golang/persistence"
+}

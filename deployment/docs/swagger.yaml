@@ -1,0 +1,95 @@
+definitions:
+  models.Message:
+    properties:
+      id:
+        example: 0
+        type: integer
+      text:
+        example: hello how are you
+        type: string
+      timestamp:
+        example: "2019-10-28T14:20:37.170146584-03:00"
+        type: string
+    type: object
+  views.AddMessageRequest:
+    properties:
+      message:
+        example: this is a sample message
+        type: string
+    type: object
+  views.AddMessageResponse:
+    properties:
+      msg:
+        $ref: '#/definitions/models.Message'
+        type: object
+    type: object
+  views.ErrorResponse:
+    properties:
+      description:
+        example: invalid json
+        type: string
+    type: object
+  views.GetMessageResponse:
+    properties:
+      message:
+        $ref: '#/definitions/models.Message'
+        type: object
+    type: object
+  views.GetMessagesResponse:
+    properties:
+      messages:
+        items:
+          $ref: '#/definitions/models.Message'
+        type: array
+    type: object
+info:
+  contact: {}
+  description: Sample API to demonstrate how we can generate documentation with Swagger
+  license: {}
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /messages:
+    get:
+      description: Obtains the internal structure in charge of message storage
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/views.GetMessagesResponse'
+    post:
+      description: Adds a message into internal structure
+      parameters:
+      - description: Add Message Request
+        in: body
+        name: message
+        schema:
+          $ref: '#/definitions/views.AddMessageRequest'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/views.AddMessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.ErrorResponse'
+  /messages/{id}:
+    get:
+      description: Gets a message by ID
+      parameters:
+      - description: MessageID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/views.GetMessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/views.ErrorResponse'
+swagger: "2.0"

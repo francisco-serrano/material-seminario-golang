@@ -1,0 +1,146 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Sample API to demonstrate how we can generate documentation with Swagger",
+        "title": "Swagger Example API",
+        "contact": {},
+        "license": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/messages": {
+            "get": {
+                "description": "Obtains the internal structure in charge of message storage",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/views.GetMessagesResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Adds a message into internal structure",
+                "parameters": [
+                    {
+                        "description": "Add Message Request",
+                        "name": "message",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/views.AddMessageRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/views.AddMessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/views.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/messages/{id}": {
+            "get": {
+                "description": "Gets a message by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "MessageID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/views.GetMessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/views.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Message": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "text": {
+                    "type": "string",
+                    "example": "hello how are you"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "example": "2019-10-28T14:20:37.170146584-03:00"
+                }
+            }
+        },
+        "views.AddMessageRequest": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "this is a sample message"
+                }
+            }
+        },
+        "views.AddMessageResponse": {
+            "type": "object",
+            "properties": {
+                "msg": {
+                    "type": "object",
+                    "$ref": "#/definitions/models.Message"
+                }
+            }
+        },
+        "views.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "invalid json"
+                }
+            }
+        },
+        "views.GetMessageResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "object",
+                    "$ref": "#/definitions/models.Message"
+                }
+            }
+        },
+        "views.GetMessagesResponse": {
+            "type": "object",
+            "properties": {
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Message"
+                    }
+                }
+            }
+        }
+    }
+}
